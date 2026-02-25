@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get the HTML source code of any website.">
+    <meta name="keywords" content="html, website, source code, fetch, downloader, online tool">
+    <meta name="author" content="Elleven">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Website HTML Fetcher">
+    <meta property="og:description" content="A simple tool to retrieve and view the HTML source of any webpage.">
+    <meta property="og:url" content="YOUR_WEBSITE_URL_HERE">
+    <title>Website HTML Fetcher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+/* Global Styles & Typography */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark gray text */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    box-sizing: border-box;
+    line-height: 1.6;
+}
+
+.main-wrapper {
+    background-color: #ffffff; /* White content background */
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba
+(0, 0, 0, 0.08); /* Softer, deeper shadow */
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Ensures rounded corners are respected */
+}
+
+/* Header */
+.header {
+    padding: 30px 40px;
+    text-align: center;
+    border-bottom: 1px solid #eee; /* Subtle separator */
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #222;
+    margin: 0;
+}
+
+/* Main Content Area */
+.content-area {
+    display: flex;
+    flex-direction: row; /* Default for desktop */
+    padding: 30px 40px;
+    gap: 40px; /* Space between panels */
+}
+
+/* Controls Panel */
+.controls-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.input-group, .option-group {
+    background-color: #f9f9f9; /* Off-white for groups */
+    border-radius: 8px;
+    padding: 25px;
+    border: 1px solid #eee;
+}
+
+.input-label, .option-title {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    transition: border-color 0.2s ease;
+}
+
+.input-field:focus {
+    border-color: #999;
+    outline: none;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    flex: 1; /* Make buttons take equal width in a row */
+    min-width: 120px; /* Ensure minimum button width */
+}
+
+.primary-btn {
+    background-color: #333;
+    color: #fff;
+}
+
+.primary-btn:hover {
+    background-color: #000;
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background-color: #f0f0f0;
+    color: #555;
+    border: 1px solid #ccc;
+}
+
+.secondary-btn:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-1px);
+}
+
+.download-btn {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* Output Panel */
+.output-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.output-area {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid #eee;
+    min-height: 300px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.9rem;
+    color: #333;
+    overflow: auto;
+    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+}
+
+.cooldown-message {
+    text-align: center;
+    color: #e44d26; /* A warning-like color */
+    font-weight: 500;
+    min-height: 20px; /* Reserve space */
+}
+
+/* Footer */
+.footer {
+    padding: 20px 40px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    font-size: 0.85rem;
+    color: #777;
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.footer a {
+    color: #555;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    color: #333;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .main-wrapper {
+        width: 95%;
+        margin: 15px auto;
+        border-radius: 8px;
+    }
+
+    .header {
+        padding: 20px 25px;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .content-area {
+        flex-direction: column; /* Stack panels on mobile */
+        padding: 25px;
+        gap: 25px;
+    }
+
+    .controls-panel {
+        gap: 20px;
+    }
+
+    .input-group, .option-group {
+        padding: 20px;
+    }
+
+    .button-row {
+        flex-direction: column; /* Stack buttons vertically */
+    }
+
+    .btn {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.6rem;
+    }
+
+    .main-wrapper {
+        margin: 10px auto;
+        border-radius: 5px;
+    }
+
+    .header, .content-area, .footer {
+        padding: 15px;
+    }
+
+    .input-group, .option-group {
+        padding: 15px;
+    }
+
+    .input-field, .btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
+    </style>
+
+</head>
+<body>
+    <div class="main-wrapper">
+        <header class="header">
+            <h1>Website HTML Fetcher</h1>
+        </header>
+
+        <main class="content-area">
+            <section class="controls-panel">
+                <div class="input-group">
+                    <label for="urlInput" class="input-label">Website URL</label>
+                    <input type="text" id="urlInput" value="https://example.com" placeholder="e.g., https://www.google.com" class="input-field">
+                    <div class="button-row">
+                        <button id="fetchHtmlBtn" class="btn primary-btn">Fetch HTML</button>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <h3 class="option-title">Actions</h3>
+                    <div class="button-row">
+                        <button id="copyCodeBtn" class="btn secondary-btn">Copy HTML</button>
+                        <button id="downloadHtmlBtn" class="btn secondary-btn">Download HTML</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="output-panel">
+                <h3 class="option-title">Fetched HTML</h3>
+                <pre id="htmlOutput" class="output-area">Paste a URL and click "Fetch HTML" to see the content here.</pre>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Powered By <a href="https://x.com/ellevenmind" target="_blank" rel="noopener noreferrer">Elleven</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
